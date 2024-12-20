@@ -1,0 +1,1156 @@
+students = {}
+
+def add_student(id, name, age, grade):
+    if id in students:
+        print(f"Student with id {id} already exists")
+    else:
+        students[id] = {"name": name, "age": age, "grade": grade}
+        print(f"Student with id {id} added successfully")
+
+def remove_student(id):
+    if id in students:
+        del students[id]
+        print(f"Student with id {id} removed successfully")
+    else:
+        print(f"Student with id {id} not found")
+
+def update_student(id, name, age, grade):
+    if id in students:
+        students[id] = {"name": name, "age": age, "grade": grade}
+        print(f"Student with id {id} updated successfully")
+    else:
+        print(f"Student with id {id} not found")
+def display_student():
+    if not students:
+        print("No student found")
+    else:
+        print("Student Records:")
+        for id, info in students.items():
+            print(f"ID: {id}, Name: {info['name']}, Age: {info['age']}, Grade: {info['grade']}")
+
+while True:
+    print("\nStudent Management System")
+    print("1. Add Student")
+    print("2. Remove Student")
+    print("3. Update Student")
+    print("4. Display Students")
+    print("5. Exit")
+    
+    choice = input("Enter your choice (1-5): ")
+    
+    if choice == "1":
+        id = int(input("Enter student ID: "))
+        name = input("Enter student name: ")
+        age = int(input("Enter student age: "))
+        grade = input("Enter student grade: ")
+        add_student(id, name, age, grade)
+    elif choice == "2":
+        id = int(input("Enter student ID to remove: "))
+        remove_student(id)
+    elif choice == "3":
+        id = int(input("Enter student ID to update: "))
+        name = input("Enter new name (or press Enter to skip): ")
+        age = input("Enter new age (or press Enter to skip): ")
+        grade = input("Enter new grade (or press Enter to skip): ")
+        
+        name = name if name else None
+        age = int(age) if age else None
+        grade = grade if grade else None
+        
+        update_student(id, name, age, grade)
+    elif choice == "4":
+        display_student()
+    elif choice == "5":
+        print("Exiting the system. Goodbye!")
+        break
+    else:
+        print("Invalid choice. Please try again.")
+===============================================================================
+
+
+
+students = {}
+
+def add_student(id, name, age, grade):
+    if id in students:
+        print(f"Student with id {id} already exists")
+    else:
+        students[id] = {"name": name, "age": age, "grade": grade}
+        print(f"Student with id {id} added successfully")
+
+def remove_student(id):
+    if id in students:
+        del students[id]
+        print(f"Student with id {id} removed successfully")
+    else:
+        print(f"Student with id {id} not found")
+
+def update_student(id, name=None, age=None, grade=None):
+    if id in students:
+        if name:
+            students[id]["name"] = name
+        if age:
+            students[id]["age"] = age
+        if grade:
+            students[id]["grade"] = grade
+        print(f"Student with id {id} updated successfully")
+    else:
+        print(f"Student with id {id} not found")
+
+def display_student():
+    if not students:
+        print("No student found")
+    else:
+        print("Student Records:")
+        for id, info in students.items():
+            print(f"ID: {id}, Name: {info['name']}, Age: {info['age']}, Grade: {info['grade']}")
+
+while True:
+    print("\nStudent Management System")
+    print("1. Add Student")
+    print("2. Remove Student")
+    print("3. Update Student")
+    print("4. Display Students")
+    print("5. Exit")
+    
+    choice = input("Enter your choice (1-5): ")
+    
+    if choice == "1":
+        id = int(input("Enter student ID: "))
+        name = input("Enter student name: ")
+        age = int(input("Enter student age: "))
+        grade = input("Enter student grade: ")
+        add_student(id, name, age, grade)
+    elif choice == "2":
+        id = int(input("Enter student ID to remove: "))
+        remove_student(id)
+    elif choice == "3":
+        id = int(input("Enter student ID to update: "))
+        name = input("Enter new name (or press Enter to skip): ")
+        age = input("Enter new age (or press Enter to skip): ")
+        grade = input("Enter new grade (or press Enter to skip): ")
+        
+        name = name if name else None
+        age = int(age) if age else None
+        grade = grade if grade else None
+        
+        update_student(id, name, age, grade)
+    elif choice == "4":
+        display_student()
+    elif choice == "5":
+        print("Exiting the system. Goodbye!")
+        break
+    else:
+        print("Invalid choice. Please try again.")
+==================================
+#Stimulate user input validation in a login system to handle
+#  the following cases where the user name is empty and password length is
+#  insufficient less than six AndAny other unexpected error# Custom exception for empty username
+
+
+def validate_login(username,password):
+    if not username:
+        raise(ValueError('username is required'))
+    if not password:
+        raise(ValueError('password is required'))
+    if(len(password)<6):
+        raise(ValueError('password must be atleast 6 characters long'))
+    return "Successfully loged in"
+try:
+    print("Welcome to login application")
+    username=input("Enter your username:")
+    password=input("Enter your password")
+    print(validate_login(username,password))
+except ValueError as e:
+    print("input error",e)
+except Exception as e:
+    print("unexpected error",e)
+finally:
+    print("Thank you for using login application")
+===============
+import numpy as np
+#pip install numpy
+temperatures=np.array([
+    [30,32,35],#c1
+    [31,34,36],#c2
+    [29,28,33],#c3
+    [32,35,37],#c4
+    [30,30,40],#c5
+    [30,30,40],#c6
+    [31,31,31],#c7
+])
+print("Temperature Data:",temperatures)
+#average temperature of each city
+print("Average temperature of each city:",temperatures.mean(axis=0))
+#average temperature of each day
+print("Average temperature of each day:",temperatures.mean(axis=1))
+#average temperature of all data
+print("Average temperature of all data:",temperatures.mean())
+#Day with highest temperature in each day
+np.argmax(temperatures,axis=0)
+temperature_far=temperatures*9/5+32
+print("Temperature in Fahrenheit:",temperature_far)
+city_below_threshold_of_30=temperatures[:,0]<30
+#temperatures[:,0] will give the first column of the array
+print("Day city1 with temperature below 30:",city_below_threshold_of_30)
+#identify a day with temperature above 35
+day_above_35=np.any(temperatures>35,axis=1)
+print("Days with temperature above 35:",day_above_35)
+#identify a day with temperature above 35 in all cities
+day_above_35_all=np.all(temperatures>35,axis=1)
+print("Days with temperature above 35 in all cities:",day_above_35_all)
+#identify a day with temperature above 35 in all cities
+day_above_35_all=np.all(temperatures>35,axis=0)
+print("Days with temperature above 35 in all days:",day_above_35_all)
+==========================
+#For 6 students and 4 subjects, matrix entry concerns the marks
+# 1. calculating the average marks of each subject 
+# 2. calculate the average marks of each student 
+# 3. Calculate the overall average
+# 4. Display the highest marks 
+# 5. Identify a student having marks greater than 70 
+# 6. All the subject with marks greater than 40 including all the students 
+# 7. Convert the average marks into percentage#
+
+import numpy as np
+
+# Marks of 6 students in 4 subjects
+marks = np.array([
+    [85, 78, 92, 65],  # Student 1
+    [70, 68, 75, 80],  # Student 2
+    [60, 62, 67, 72],  # Student 3
+    [88, 85, 82, 90],  # Student 4
+    [55, 58, 60, 62],  # Student 5
+    [95, 92, 94, 88],  # Student 6
+])
+
+# 1. Average marks of each subject
+average_subjects = marks.mean(axis=0)
+print("Average marks of each subject:", average_subjects)
+
+# 2. Average marks of each student
+average_students = marks.mean(axis=1)
+print("Average marks of each student:", average_students)
+
+# 3. Overall average marks
+overall_average = marks.mean()
+print("Overall average marks:", overall_average)
+
+# 4. Display the highest marks
+highest_marks = marks.max()
+print("Highest marks:", highest_marks)
+
+# 5. Identify students having marks greater than 70 in any subject
+students_above_70 = np.any(marks > 70, axis=1)
+print("Students with marks greater than 70:", students_above_70)
+
+# 6. Subjects where all students scored above 40
+subjects_above_40 = np.all(marks > 40, axis=0)
+print("Subjects where all students scored above 40:", subjects_above_40)
+
+# 7. Convert the average marks of each student into percentage
+average_percentages = (average_students / 100) * 100
+print("Average marks as percentages:", average_percentages)
+
+print(np.mean(marks,axis=0))
+print(np.mean(marks,axis=1))
+print(np.mean(marks,axis=2))#outofbound
+=================
+
+import numpy as np
+heights=[170,175,180,160]
+weights=[65,70,67,59]
+height_array=np.array(heights)
+weight_array=np.array(weights)
+print("Height array:",height_array)
+print("Weight array:",weight_array)
+#BMI weight(kg)/(height in cm/100)
+BMI=weight_array/(height_array/100)**2
+print("BMI:",BMI)
+print("BMI rounded off",np.round(BMI,2))
+print("First height:",height_array[0])
+print("Last weight=",weight_array[-1])
+print("First two heights:",height_array[0:2])
+print("Last two weights:",weight_array[-2:])
+#Normalized value=(value-minValue)/(Maxvalue-minvalue)
+height_normalized=(height_array-height_array.min()/height_array.max()-height_array.min())
+print("Normalized height:",height_normalized)
+weight_normalized=(weight_array-weight_array.min()/weight_array.max()-weight_array.min())
+print("Normalized weight:",weight_normalized)
+#stack the normalized height and weight as 2d array
+#feature=np.column_stack(height_normalized,weight_normalized)
+#print("Feature by stacking into 2d form:",feature)
+overweight_value=np.where(BMI>25)
+print("Overweight value=",overweight_value)
+#overweight_data=feature[overweight_value]
+#sprint("Overweight individual(normalized data)=",overweight_data)
+#mean height
+mean_height=np.mean(height_normalized)
+print("Normalized mean height=",mean_height)
+#standard weight
+std_weight=np.std(weight_normalized)
+print("Standard deviation of normalized weight=",std_weight)
+==============
+import pandas as pd
+
+data = {
+    "Name": ["John", "Anna", "Peter", "Linda"],
+    "Age": [24, 13, None, 33],
+    "Sales": [243, 123, 345, 456]
+}
+df = pd.DataFrame(data)
+print("DataFrame: ", df)
+print("First row: ", df.loc[0])
+print("Age column", df['Age'])
+print("Null values", df[df['Age'].isnull()]) # Rows with null values
+print("Non null values", df[df['Age'].notnull()]) # Rows with non null values
+df['Age'].fillna(0,inplace = True) # Fill null values
+
+print("DataFrame after filling null values", df)
+
+print("Sales with value > 200", df[df['Sales'] > 200]) # sales with value > 200
+# Sales with value > 200 and age > 30
+print("Sales with value > 200 and age > 30", df[df['Sales'] > 200] and df[df['Age'] > 30])
+# group by sales and get avg value
+groupbysales = df.groupby('Sales')['Age'].mean()
+print("Grouped data", groupbysales)
+====================
+import pandas as pd
+df=pd.read_csv('data.csv')
+print("First 5 rows of the dataframe:")
+print(df.head())
+print("Dataframe information:")
+print(df.info())
+print("Summary of the dataframe:")
+print(df.describe())
+print("Specific column information:")
+if 'Age' in df.columns:
+    print("Mean of the age=",df['Age'].mean())
+else:
+    print("Age column is not present in the dataframe")
+if 'Gender' in df.columns:
+    male_data=df[df['Gender']=='Male']
+    print("Rows where gender is male")
+    print(male_data)
+if 'Salary' in df.columns:
+    df['Salary_after_tax']=df['Salary']*0.2;
+    print("Dataframe after adding new column salary after tax:")
+    print(df.head())
+if 'Department' in df.columns and 'Salary' in df.columns:
+    salary_by_department=df.groupby('Department')['Salary'].mean()
+    print(salary_by_department)
+if 'Age' in df.columns:
+    sorted_df=df.sort_values('Age',ascending=False)
+    print("Dataframe sorted by age in decending order:")
+    print(sorted_df.head())
+#modified data saved to result.csv file
+df.to_csv("result.csv",index=False)
+print("Result stored in result.csv file...pls check")
+==================
+import pandas as pd
+import numpy as nm
+import matplotlib.pyplot as plt
+
+# data cleaning and loading
+data=pd.read_csv('sales_data.csv')
+
+# check for missing values
+# here isnull().sum() will return the number of missing values in each column
+print(data.isnull().sum())
+data=data.dropna()
+
+# covering the data to datatime data type
+#This converts the OrderDtae column into Date Time format to falicitate time based analysis
+data['OrderDate']=pd.to_datetime(data['OrderDate'])
+# exploring the data analysis
+
+
+#total sales over time
+# it creates a new column by name MonthYear by extracting month and year from the order date 
+#it help in Agregating sales data monthly
+data['MonthYear']=data['OrderDate'].dt.to_period('M')
+
+
+# it gruops the date by month year and it calculates total quantity sold out for each month 
+monthy_sales=data.groupby('MonthYear')['Quantity'].sum()
+
+# top selling product
+top_selling_produvt=data.groupby('Category')['Quantity'].sum().nlargest(5)
+
+# realtionship between price and quantity sold
+plt.scatter(data['UnitPrice'],data['Quantity'])
+plt.xlabel('Unit Price')
+plt.ylabel('Quantity Sold')
+plt.title('Price v/s Quantity')
+plt.show()
+
+#seasonal trends in series
+
+monthy_sales.plot(kind='line',marker='o')
+
+plt.xlabel('Total sales')
+plt.ylabel('Monthly Sales trend ')
+plt.xticks(rotation=45)
+plt.show()
+
+# data visualization
+top_selling_produvt.plot(kind='bar')
+plt.xlabel('Category ')
+plt.ylabel('Quantity Sold')
+plt.title('Top selling product')
+plt.show()
+
+
+# electronic  category has consistently higher sales
+#price discount has a postive impact on quantity sold based on scatter plot analysis
+# seasonal peaks in sales suggest potential for targeted marketing cap
+=====================
+import seaborn as sns
+import pandas as pd
+import matplotlib.pyplot as plt
+df=pd.DataFrame(
+    {
+     'Customer':['shrinath','Abhishek', 'Ajit','Ram','Raghav','Rahul'],
+     'Sales':   [200,150,300,400,500,600],
+     'Region':  ['North','South','East','West','North','South']
+    }    
+)
+pivot_table=df.pivot_table(index='Region',values='Sales',aggfunc='sum')
+print(pivot_table)
+
+#sns.histplot(df['Sales'])
+sns.heatmap(pivot_table,annot=True)
+plt.title('Sales by Region')
+plt.show()
+sns.pairplot(df)
+plt.show()
+
+
+sns.barplot(x='Region',y='Sales',data=df)
+plt.title('barplot')
+plt.show()
+
+sns.barplot(x='Region',y='Sales',data=df)
+plt.title('boxplot')
+plt.show()
+
+sns.countplot(x='Region',data=df)
+plt.title('countplot')
+plt.show()
+
+sns.scatterplot(x='Region',y='Sales',data=df)
+plt.title('scatterplot')
+plt.show()
+
+sns.histplot(df['Sales'])
+plt.title('histplot')
+plt.show()
+========================
+import seaborn as sns
+import pandas as pd
+import matplotlib.pyplot as plt
+df=pd.DataFrame(
+    {
+     'Customer':['shrinath','Abhishek', 'Ajit','Ram','Raghav','Rahul'],
+     'Sales':   [200,150,300,400,500,600],
+     'Region':  ['North','South','East','West','North','South'],
+     'Date':  ['2022-12-06','2023-12-07','2024-12-08','2020-12-09','2021-12-10','2024-12-11']
+    }    
+)
+pivot_table=df.pivot_table(index='Region',values='Sales',aggfunc='sum')
+print(pivot_table)
+
+df['Date']=pd.to_datetime(df['Date'])
+df.sort_values('Date',inplace=True)
+plt.plot(df['Date'],df['Sales'])
+plt.title('Sales over Time')
+plt.xlabel('Date ')
+plt.ylabel('sales')
+plt.xticks(rotation=45)
+plt.show()
+#region v/s Sales
+sns.barplot(x='Region',y='Sales',data=df,palette='Blues_d')
+#pallet is used to change the color of the bar graph
+# pallet vales 'coolwarm, 'deep' 'blue' 'muted' 'bright' 'dark' 
+plt.show()
+correlation=df.corr(numeric_only=True)
+sns.heatmap(correlation,cmap='Blues')
+#cmap is used to change the color of the bar graph
+# cmap vales 'coolwarm', 'deep' 'blue' 'muted' 'bright' 'dark' 
+plt.title('Correlation heatmap')
+plt.show()
+=============
+from sklearn.linear_model import LinearRegression
+import numpy as np
+x=np.array([[1500],[1600],[1700],[1800],[1900]])
+y=np.array([300000,400000,500000,600000,700000])
+model= LinearRegression()
+model.fit(x,y)
+new_house=np.array([[2000]])
+predicted_price=model.predict(new_house)
+print("Predicted price of a house with area 2000 sq.ft is",predicted_price)
+============
+import numpy as np
+from sklearn.linear_model import LogisticRegression
+from sklearn.model_selection import train_test_split
+from sklearn.metrics import accuracy_score
+
+x=np.array([
+    [1],[2],[3],[4],[5],[6],[7],[8],[9],[10]
+])
+y = np.array([1,1,1,1,1,0,0,0,0,0])
+#y = np.array([1,1,1,1,0,0,0,0,0,0])
+#y = np.array([1,0,1,0,1,0,1,0,1,0])
+#y = np.array([0,1,0,1,0,1,0,1,0,1])
+
+
+x_train,x_test,y_train,y_test = train_test_split(x,y,test_size=0.2, random_state = 42)
+# initial and train logistic model
+
+model = LogisticRegression()
+model.fit(x_train,y_train)
+# predict on the test data
+
+y_pred = model.predict(x_test)
+# Evaluate the model
+
+print("Accuracy :", accuracy_score(y_test,y_pred))
+new_data=np.array([[6.5]])
+# predict for a new student who studies 6.5 hrs
+
+probability=model.predict_proba(new_data)
+prediction=model.predict(new_data)
+print(f"probability of passing{probability[0][1]:.3f}")
+print(f"prediction (pass=1,Fail=0):{prediction[0]}")
+=====================
+import numpy as np
+from sklearn.linear_model import LogisticRegression
+from sklearn.model_selection import train_test_split
+from sklearn.metrics import accuracy_score
+import pandas as pd 
+
+data = {
+    'Age': [25, 30, 22, 40, 35, 50, 28, 45, 33, 29],
+    'Annual_income': [40, 60, 30, 80, 50, 100, 45, 75, 55, 65],
+    'visited_page': [1, 1, 0, 1, 0, 1, 0, 1, 0, 1],
+    'Brought_prod': [0, 1, 0, 1, 0, 1, 0, 1, 0, 1]
+}
+
+df = pd.DataFrame(data)
+# define feature variable x and target variable y
+x = df[['Age', 'Annual_income', 'visited_page']]
+y = df[['Brought_prod']]
+#split data into training and testing sets
+x_train, x_test, y_train, y_test = train_test_split(x, y, test_size = 0.25, random_state = 42)
+#create model
+model = LogisticRegression()
+
+model.fit(x_train, y_train)
+
+y_pred = model.predict(x_test)
+# calculate Accuracy
+print("Model Accuarcy: ", accuracy_score(y_test, y_pred))
+#add new customer 
+new_customer = np.array([[32, 55, 1]])
+#predivt new customer 
+probability = model.predict_proba(new_customer)
+prediction = model.predict(new_customer)
+print("Prediction to buy product ", prediction[0])
+#0,0--->no    0,1---> yes
+print("Probability to buy product (yes) ", probability[0][1])
+======================
+import numpy as np
+from sklearn.linear_model import LogisticRegression
+from sklearn.model_selection import train_test_split
+from sklearn.metrics import accuracy_score
+import pandas as pd 
+y_test=[0,1,1,0,1]
+y_pred=[0,0,0,0,0]
+accuracy_score=accuracy_score(y_test,y_pred)
+print("Accuracy=",accuracy_score)
+========================
+import numpy as np
+import matplotlib.pyplot as plt
+from sklearn.linear_model import LinearRegression
+from sklearn.preprocessing import PolynomialFeatures
+
+
+#x=np.array([[1,2,3,4,5]]).reshape(-1,1)
+#y=np.array([2,3,5,4,6])
+x = np.array([[1, 2, 3]]).reshape(-1, 1)
+y = np.array([2, 4, 6])
+
+# Transforming data to include polynomial feature
+
+poly=PolynomialFeatures(degree=2)
+x_poly=poly.fit_transform(x)
+
+# fitting the polynomial regresssion model
+model=LinearRegression()
+model.fit(x_poly,y)
+
+#predicting the result
+y_pred=model.predict(x_poly)
+
+#plotting the graph
+plt.scatter(x,y,color="blue")
+plt.plot(x,y_pred,color="red")
+
+plt.xlabel("hrs studied")
+plt.ylabel("Test score")
+
+plt.title("Polynomial Regression(Degree2)")
+plt.show()
+
+#make prediction
+x_new=np.array([[2]])
+x_new_poly=poly.transform(x_new)
+y_new_pred=model.predict(x_new_poly)
+print("Predicited values = ",y_new_pred)
+=================
+import numpy as np
+import matplotlib.pyplot as plt
+from sklearn.linear_model import LinearRegression
+from sklearn.preprocessing import PolynomialFeatures
+
+
+
+x = np.array([1, 2, 3,4,5,6]).reshape(-1, 1) 
+y = np.array([150,180,210,280,310,400])
+
+plt.scatter(x,y,color="blue")
+plt.title("HOUSE v/s Number of Bedrooms")
+plt.xlabel(" Number of Bedrooms")
+plt.ylabel("House prices")
+plt.show()
+# Transforming data to include polynomial feature
+poly=PolynomialFeatures(degree=2)
+x_poly=poly.fit_transform(x)
+# fitting the polynomial regresssion model
+model=LinearRegression()
+model.fit(x_poly,y)
+
+#make prediction
+x_new=np.array([[5]])
+x_new_poly=poly.transform(x_new)
+y_new_pred=model.predict(x_new_poly)
+print("Predicited values = ",y_new_pred)
+=====================
+import numpy as np
+import matplotlib.pyplot as plt
+from scipy.stats import bernoulli, binom, poisson, geom, norm, uniform, expon, beta
+
+fig, axs = plt.subplots(4, 2, figsize=(14, 16))
+fig.suptitle("Demonstration of Various Probability Distributions", fontsize=18)
+
+# 1. Bernoulli Distribution
+# Formula: P(X=x) = p^x * (1-p)^(1-x), where x ∈ {0, 1}, 0 <= p <= 1
+p = 0.7  # Probability of success
+data_bernoulli = bernoulli.rvs(p, size=1000)
+axs[0, 0].hist(data_bernoulli, bins=2, color='blue', alpha=0.7)
+axs[0, 0].set_title('Bernoulli Distribution (p=0.7)')
+
+# 2. Binomial Distribution
+# Formula: P(X=k) = C(n, k) * p^k * (1-p)^(n-k), where k = 0, 1, ..., n
+n, p = 10, 0.9  # 10 trials, probability of success = 0.5
+data_binom = binom.rvs(n, p, size=1000)
+axs[0, 1].hist(data_binom, bins=n+1, color='green', alpha=0.7)
+axs[0, 1].set_title('Binomial Distribution (n=10, p=0.5)')
+
+# 3. Poisson Distribution
+# Formula: P(X=k) = (λ^k * e^(-λ)) / k!, where k = 0, 1, 2, ...
+lambda_ = 6  # Average number of events per interval
+data_poisson = poisson.rvs(lambda_, size=1000)
+axs[1, 0].hist(data_poisson, bins=10, color='orange', alpha=0.7)
+axs[1, 0].set_title('Poisson Distribution (λ=4)')
+
+# 4. Geometric Distribution
+# Formula: P(X=k) = (1-p)^(k-1) * p, where k = 1, 2, 3, ..., 0 <= p <= 1
+p = 0.3  # Probability of success
+data_geom = geom.rvs(p, size=1000)
+axs[1, 1].hist(data_geom, bins=15, color="purple", alpha=0.7)
+axs[1, 1].set_title('Geometric Distribution (p=0.3)')
+
+# 5. Normal Distribution
+# Formula: f(x) = (1 / (σ * sqrt(2π))) * e^(-(x-μ)^2 / (2σ^2))
+mu, sigma = 0, 1  # Mean = 0, Std Dev = 1
+data_norm = norm.rvs(mu, sigma, size=1000)
+axs[2, 0].hist(data_norm, bins=30, color='red', alpha=0.7)
+axs[2, 0].set_title('Normal Distribution (μ=0, σ=1)')
+
+# 6. Uniform Distribution
+# Formula: f(x) = 1 / (b-a), a <= x <= b
+a, b = 0, 10  # Range [0, 10]
+data_uniform = uniform.rvs(loc=a, scale=b-a, size=1000)
+axs[2, 1].hist(data_uniform, bins=20, color='cyan', alpha=0.7)
+axs[2, 1].set_title('Uniform Distribution (a=0, b=10)')
+
+# 7. Exponential Distribution
+# Formula: f(x) = λ * e^(-λx), x >= 0
+lambda_ = 1  # Rate parameter
+data_expon = expon.rvs(scale=1/lambda_, size=1000)
+axs[3, 0].hist(data_expon, bins=30, color='brown', alpha=0.7)
+axs[3, 0].set_title('Exponential Distribution (λ=1)')
+
+# 8. Beta Distribution
+# Formula: f(x) = (x^(α-1) * (1-x)^(β-1)) / B(α, β), where B(α, β) is the Beta function
+alpha, beta_param = 2, 5  # Shape parameters
+data_beta = beta.rvs(alpha, beta_param, size=1000)
+axs[3, 1].hist(data_beta, bins=30, color='pink', alpha=0.7)
+axs[3, 1].set_title('Beta Distribution (α=2, β=5)')
+
+# Adjust layout
+plt.tight_layout(rect=[0, 0.03, 1, 0.95])
+plt.show()
+=============================
+import numpy as np
+import pandas as pd
+import matplotlib.pyplot as plt
+import seaborn as sns
+from sklearn.model_selection import train_test_split
+from sklearn.tree import DecisionTreeClassifier, plot_tree
+from sklearn.metrics import classification_report, accuracy_score, confusion_matrix
+from sklearn.preprocessing import LabelEncoder
+
+data = {
+    'applicant_income':[45000, 50000, 120000, 80000, 60000, 70000, 85000, 90000, 35000, 100000],
+    'credit_score':[600, 650, 720, 690, 700, 710, 685, 730, 720, 690],
+    'loan_amount':[10000, 12000, 14000, 30000, 25000, 71000, 67000, 43000, 21000, 35000],
+    'employment_status':['Employed', 'Employed', 'SelfEmployed', 'Employs', 'SelfEmployed', 'Employed', 'Employed', 'SelfEmployed', 'Employs', 'SelfEmployed'],
+    'loan_approved':['Yes', 'Yes', 'No', 'Yes', 'No', 'Yes', 'Yes', 'No', 'No', 'No']
+}
+
+df = pd.DataFrame(data)
+label_encoder = LabelEncoder()
+df['employment_status'] = label_encoder.fit_transform(df['loan_amount'])
+df['loan_approved'] = label_encoder.fit_transform(df['loan_approved'])
+print(df)
+
+X = df.drop('loan_approved', axis = 1)
+y = df['loan_approved']
+
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size = 0.2, random_state = 42)
+model = DecisionTreeClassifier(random_state = 42)
+model.fit(X_train, y_train)
+y_pred = model.predict(X_test)
+print("Accuracy ", accuracy_score(y_test, y_pred))
+print("Classification Report ", classification_report(y_test, y_pred))
+print("Confusion Matrix ", confusion_matrix(y_test, y_pred))
+
+#plot confusion matrix
+plt.figure(figsize=(10,7))
+cm=confusion_matrix(y_test,y_pred)
+sns.heatmap(cm,annot=True)
+plt.xlabel('Predicted')
+plt.ylabel('Truth')
+plt.show()
+# Plot the Decision Tree
+plt.figure(figsize=(20, 10))
+plot_tree(
+    model,
+    #feature_names=X.columns,
+    class_names=['No', 'Yes'],
+    filled=True,
+
+    fontsize=10
+)
+plt.title('Decision Tree')
+plt.show()
+==================
+import pandas as pd
+import seaborn as sns
+import matplotlib.pyplot as plt
+from sklearn.model_selection import train_test_split
+from sklearn.tree import DecisionTreeClassifier, plot_tree
+from sklearn.metrics import classification_report, accuracy_score, confusion_matrix
+from sklearn.preprocessing import LabelEncoder
+
+# Data
+data = {
+    'Study HOURS': ["High", "Low", "Medium", "Low", "Medium"],
+    'ATTENDANCE': ["High", "High", "High", "Low", "Low"],
+    'PASS/FAIL': ["Pass", "Pass", "Pass", "Fail", "Fail"]
+}
+
+df = pd.DataFrame(data)
+
+# Encode the categorical data
+label_encoder = LabelEncoder()
+df['Study HOURS'] = label_encoder.fit_transform(df['Study HOURS'])
+df['ATTENDANCE'] = label_encoder.fit_transform(df['ATTENDANCE'])
+df['PASS/FAIL'] = label_encoder.fit_transform(df['PASS/FAIL'])
+
+# Split the data into features and target
+X = df.drop(columns=['PASS/FAIL'])
+y = df['PASS/FAIL']
+
+# Train-test split
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
+
+# Instantiate the model
+model = DecisionTreeClassifier(random_state=42)
+model.fit(X_train, y_train)
+
+# Predict the model
+y_pred = model.predict(X_test)
+
+# Evaluation
+accuracy = accuracy_score(y_test, y_pred)
+classification = classification_report(y_test, y_pred)
+cm = confusion_matrix(y_test, y_pred)  # Ensure this variable is defined here
+
+print(f'Accuracy = {accuracy}')
+print(f'Classification Report:\n{classification}')
+print(f'Confusion Matrix:\n{cm}')
+
+# Plot Confusion Matrix Heatmap
+if cm.size > 0:  # Ensure confusion matrix is computed
+    plt.figure(figsize=(8, 6))
+    sns.heatmap(cm, annot=True, cmap="Blues", fmt='d', xticklabels=label_encoder.classes_, yticklabels=label_encoder.classes_)
+    plt.xlabel('Predicted')
+    plt.ylabel('Truth')
+    plt.title('Confusion Matrix')
+    plt.show()
+else:
+    print("Confusion matrix not generated.")
+
+# Plot the Decision Tree
+plt.figure(figsize=(12, 8))
+plot_tree(
+    model,
+    feature_names=X.columns,
+    class_names=label_encoder.classes_,
+    filled=True,
+    fontsize=10
+)
+plt.title('Decision Tree')
+plt.show()
+=================
+# Import necessary libraries
+import matplotlib.pyplot as plt
+import seaborn as sns
+from sklearn.datasets import load_iris
+from sklearn.model_selection import train_test_split, cross_val_score
+from sklearn.tree import DecisionTreeClassifier
+from sklearn.ensemble import RandomForestClassifier
+from sklearn.metrics import accuracy_score
+import numpy as np
+
+# Load the Iris dataset
+data = load_iris()
+X = data.data
+y = data.target
+
+# Split the data into training and testing sets (80% training, 20% testing)
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
+
+# Initialize the classifiers
+decision_tree = DecisionTreeClassifier(random_state=42)
+random_forest = RandomForestClassifier(n_estimators=100, random_state=42)
+
+# Train the Decision Tree classifier
+decision_tree.fit(X_train, y_train)
+y_pred_dt = decision_tree.predict(X_test)
+
+# Train the Random Forest classifier
+random_forest.fit(X_train, y_train)
+y_pred_rf = random_forest.predict(X_test)
+
+# Evaluate both models on test data
+accuracy_dt = accuracy_score(y_test, y_pred_dt)
+accuracy_rf = accuracy_score(y_test, y_pred_rf)
+
+# Perform cross-validation for both models
+cv_scores_dt = cross_val_score(decision_tree, X, y, cv=5)
+cv_scores_rf = cross_val_score(random_forest, X, y, cv=5)
+
+# Print the results
+print(f"Accuracy of Decision Tree: {accuracy_dt * 100:.2f}%")
+print(f"Accuracy of Random Forest: {accuracy_rf * 100:.2f}%")
+
+# Print cross-validation scores
+print("\nCross-validation results:")
+print(f"Decision Tree Cross-Validation Scores: {cv_scores_dt}")
+print(f"Random Forest Cross-Validation Scores: {cv_scores_rf}")
+
+# Print average cross-validation scores
+print(f"\nAverage Cross-validation score for Decision Tree: {np.mean(cv_scores_dt) * 100:.2f}%")
+print(f"Average Cross-validation score for Random Forest: {np.mean(cv_scores_rf) * 100:.2f}%")
+
+# Plotting the comparison of models
+models = ['Decision Tree', 'Random Forest']
+accuracy = [accuracy_dt, accuracy_rf]
+cv_avg = [np.mean(cv_scores_dt), np.mean(cv_scores_rf)]
+
+# Create a figure for comparison
+fig, ax = plt.subplots(1, 2, figsize=(14, 6))
+
+# Accuracy Bar Plot
+sns.barplot(x=models, y=accuracy, ax=ax[0], palette="viridis")
+ax[0].set_title('Accuracy Comparison')
+ax[0].set_ylabel('Accuracy (%)')
+ax[0].set_ylim(0, 1)
+
+# Cross-Validation Average Bar Plot
+sns.barplot(x=models, y=cv_avg, ax=ax[1], palette="viridis")
+ax[1].set_title('Cross-Validation Average Comparison')
+ax[1].set_ylabel('Average CV Score')
+ax[1].set_ylim(0, 1)
+plt.tight_layout()
+plt.show()
+======================
+from sklearn.datasets import load_iris
+from sklearn.model_selection import train_test_split
+from sklearn.neighbors import KNeighborsClassifier
+from sklearn.metrics import accuracy_score
+
+
+iris=load_iris()
+x=iris.data
+y=iris.target
+
+#split data into training and the testing set
+X_train, X_test, y_train, y_test = train_test_split(x, y, test_size=0.2, random_state=42)
+
+#intialize the knn classifier 
+knn=KNeighborsClassifier(n_neighbors=3)
+print("knn=",knn)
+#fitt the model on the training data
+knn.fit(X_train, y_train) 
+#make predictions on test data 
+y_pred=knn.predict(X_test)
+#calculate accuracy
+accuracy=accuracy_score(y_test,y_pred)
+print("Accuracy=",accuracy)
+#adding few more details
+print("Predicted classes",y_pred)
+print("Actual classes=",y_test)
+print("Predicted classes=",iris.target_names[y_pred])
+print("Actual classes=",iris.target_names[y_test])
+
+#plotting the data
+
+import matplotlib.pyplot as plt
+
+plt.scatter(x[:,0],x[:,1],c=y)
+#sepal length[:0] and sepal width[:1]
+# :0 and :1 are the index of the columns
+#cc=y is the color of the points where y is the target
+plt.xlabel("sepal length")
+plt.ylabel("sepal width")
+plt.title("actual classes")
+plt.show()
+#here c=knn.predict(X) is the predicted class
+#predict class requuired to plot the data 
+plt.scatter(x[:,0],x[:,1],c=knn.predict(x))
+plt.xlabel("sepal length")
+plt.ylabel("sepal width")
+plt.title("Predicted Classes")
+plt.show()
+# In the output we can see the actual and predicted classes
+#accuracy is also high
+#wrt k=3 we can see teh predicted classses
+# are alomost same as actual classes 
+# predictetd class means the class which the model has predicted
+# actual class means the whih is present in the dataset
+#basically in thsi program we have done
+#classification of the iris dataset based
+#on the sepal length and sepal width
+====================
+from sklearn.datasets import load_iris
+from sklearn.model_selection import train_test_split
+from sklearn.neighbors import KNeighborsClassifier
+from sklearn.metrics import accuracy_score
+
+data = {
+    'Age': [25, 30, 35, 40, 45, 33, 22],
+    'Income': [45000, 60000, 80000, 90000, 35000, 70000, 55000],
+    'Previous_purchase': [1, 0, 1, 1, 0, 0, 0],
+    'Target': [1, 0, 1, 1, 0, 1, 0]
+}
+
+import pandas as pd
+df=pd.DataFrame(data)
+x=df[['Age','Income','Previous_purchase']]
+y=df[['Target']]
+
+X_train, X_test, y_train, y_test = train_test_split(x, y, test_size=0.2, random_state=42)
+
+#intialize the knn classifier 
+model=KNeighborsClassifier(n_neighbors=3)
+print("knn=",model)
+#fitt the model on the training data
+model.fit(X_train, y_train) 
+#make predictions on test data 
+y_pred=model.predict(X_test)
+print(accuracy_score(y_test,y_pred))
+import matplotlib.pyplot as plt
+plt.scatter(df['Age'],df['Income'])
+plt.xlabel("AGE")
+plt.ylabel("Income ")
+plt.show()
+=========================
+import numpy as np
+import pandas as pd
+import matplotlib.pyplot as plt
+from sklearn.model_selection import train_test_split
+from sklearn.feature_extraction.text import CountVectorizer
+from sklearn.naive_bayes import MultinomialNB
+from sklearn.metrics import accuracy_score
+from sklearn.naive_bayes import GaussianNB
+
+data = {
+    'Age': [25, 34, 45, 29, 50, 31, 40, 28, 37, 55],
+    'Income': [45000, 60000, 70000, 50000, 80000, 55000, 90000, 40000, 75000, 85000],
+    'Bought': [1, 0, 1, 0, 1, 0, 1, 0, 1, 1]
+}
+df=pd.DataFrame(data)
+print(df)
+x=df[['Age','Income']]
+y=df[['Bought']]
+
+X_train, X_test, y_train, y_test = train_test_split(x, y, test_size=0.2, random_state=42)
+
+model=GaussianNB()
+model.fit(X_train,y_train)
+new_data=np.array([[20,50000]])
+prediction=model.predict(new_data)
+print(prediction)
+if prediction==1:
+    print('He will buy')
+    
+else :
+    print('he will not buy')
+==============
+import numpy as np
+import pandas as pd
+from sklearn.naive_bayes import GaussianNB
+
+# Dataset
+data = {
+    'Free': [1, 1, 0, 0, 0, 0],
+    'Offer': [0, 0, 1, 1, 1, 0],
+    'Buy': [0, 0, 0, 0, 0, 1],
+    'Money': [1, 0, 1, 0, 0, 0],
+    'Spam': [1, 1, 1, 0, 0, 0]
+}
+
+# Create DataFrame
+df = pd.DataFrame(data)
+
+# Features and Target
+x = df[['Free', 'Offer', 'Buy', 'Money']]  # Feature matrix
+y = df['Spam']                             # Target vector
+
+# Model Training
+model = GaussianNB()
+model.fit(x, y)
+
+# Predictions
+prediction1 = np.array([[1, 0, 0, 1]])  
+prediction2 = np.array([[0, 1, 0, 1]])  
+
+# Output Predictions
+print('Email 1:', model.predict(prediction1))
+print('Email 2:', model.predict(prediction2))
+===============
+#spam email or not
+
+import numpy as np
+
+# Dataset
+data = {
+    'Free': [1, 1, 0, 0, 0, 0],
+    'Offer': [0, 0, 1, 1, 1, 0],
+    'Buy': [0, 0, 0, 0, 0, 1],
+    'Money': [1, 0, 1, 0, 0, 0],
+    'Spam': [1, 1, 1, 0, 0, 0]  # Target variable
+}
+
+# Separate features and target
+features = ['Free', 'Offer', 'Buy', 'Money']
+X = np.array([data[f] for f in features]).T
+#X is the array of emails data[f] has the values of the feature f example: #data['Free']=[1,1,0,0,0,0]
+#.T is used to transpose the array
+#transpose is used to interchange the rows and columns required for the array to be in the correct format
+y = np.array(data['Spam'])
+#y is the array of classes data['Spam']=[1,1,1,0,0,0]
+
+
+def calculate_probabilities(X, y):
+    classes = np.unique(y) #unique is used to get the unique values of the array
+    #classes will be the unique values of the array y where y is the array of classes
+    # Initialize dictionaries to store probabilities
+    feature_prob = {cls: {} for cls in classes} 
+    #empty {} specifies that the dictionary is empty
+    # Calculate prior probability
+    #where cls is the class to which the email belongs
+    #np.sum(y == cls) is the number of emails 
+    # belonging to that class
+    class_prob = {cls: np.sum(y == cls) / len(y) for cls in classes}
+    #in the above line,
+    #  we are calculating the prior probability of each class
+    #example: if there are 3 classes and 100 emails
+    #that is cls.sum(y==cls) will be 30, 50, 20
+    #and len(y) is 100
+    #so the prior probability of class 1 will be 30/100
+    #class 2 will be 50/100 and class 3 will be 20/100
+    #probability of class 1, 2 and 3 will be 0.3, 0.5 and 0.2 respectively 
+    for cls in classes:
+        X_cls = X[y == cls] 
+        # Filter data by class where X is the array of emails and y is the array of classes
+        for idx, feature in enumerate(features):
+            feature_prob[cls][feature] = (np.sum(X_cls[:, idx]) + 1) / (len(X_cls) + 2)
+            #if cls  is 1 and feauture=free 1 represents the email is spam and 
+            # 0 represents the email is not spam
+            #X_cls is the array of emails that belong to class 1    
+            #X_cls[:, idx] will be the array of values of the feature at index idx
+            #: is the row index and idx is the column index
+            #: is used to select all the rows
+            #np.sum(X_cls[:, idx]) will be the number of emails that have the feature
+            #feature_prob[cls][feature] will be the probability of the feature given the class
+            #in the above line, we are calculating the probability of the feature given the class
+            #example: if there are 3 classes and 100 emails
+            #that is cls.sum(y==cls) will be 30, 50, 20
+            #tracing with number of emails that have the feature
+            #if the number of emails that have the feature is 10
+            #then the probability of the feature given the class will be 10+1/30+2
+            #which is 11/32
+            #that is feature_prob[1][free]=np.sum(X_cls[:, 0]) + 1) / (len(X_cls) + 2
+            #len(X_cls) is the number of emails that belong to the class=30
+            #len(X_cls)+2 is the number of emails that belong to the class+number of features
+            #which is 30+2=32
+            #therefore, feature_prob[1][free]=11/32
+            #if the number of emails that have the feature is 20
+            #then the probability of the feature given the class will be 20+1/50+2
+            #which is 21/52
+            #if the number of emails that have the feature is 5
+            #then the probability of the feature given the class will be 5+1/20+2
+            #which is 6/22
+            #probability of the feature given the class will be 11/32, 21/52, 
+    return class_prob, feature_prob
+
+# Calculate probabilities
+class_prob, feature_prob = calculate_probabilities(X, y)
+
+# Function to classify a new email
+def classify(email):
+    scores = {}
+    for cls in class_prob:
+        scores[cls] = np.log(class_prob[cls])  # Start with prior
+        for idx, val in enumerate(email):
+            if val == 1:
+                scores[cls] += np.log(feature_prob[cls][features[idx]])
+            else:
+                scores[cls] += np.log(1 - feature_prob[cls][features[idx]])
+    return max(scores, key=scores.get)
+
+
+new_email = [1, 1, 0, 0]
+result = classify(new_email)
+print("The email is", "Spam" if result == 1 else "Not Spam")
+new_email2=[0,1,0,0]
+result=classify(new_email)
+print("The email is", "Spam" if result == 1 else "Not Spam")
+=============================================
+
