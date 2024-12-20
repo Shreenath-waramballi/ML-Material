@@ -1,0 +1,64 @@
+import numpy as np
+import matplotlib.pyplot as plt
+from scipy.stats import bernoulli, binom, poisson, geom, norm, uniform, expon
+fig, axs = plt.subplots(4, 2, figsize=(14, 16))
+fig.suptitle('Demonstration of Various Probability Distributions', fontsize=18)
+
+# 1. Bernoulli Distribution
+p = 0.6  # Probability of success
+data_bernoulli = bernoulli.rvs(p, size=1000)
+axs[0, 0].hist(data_bernoulli, bins=2, color='blue', alpha=0.7)
+axs[0, 0].set_title('Bernoulli Distribution (p=0.6)')
+#P(X=1) = p, P(X=0) = 1-p (0 ≤ p ≤ 1)
+
+# 2. Binomial Distribution
+n, p = 10, 0.5  # 10 trials, probability of success = 0.5
+data_binom = binom.rvs(n, p, size=1000)
+axs[0, 1].hist(data_binom, bins=n+1, color='green', alpha=0.7)
+axs[0, 1].set_title('Binomial Distribution (n=10, p=0.5)')
+#P(X=1) = p, P(X=0) = 1-p (0 ≤ p ≤ 1)
+#P(X=k) = C(n, k) * p^k * (1-p)^(n-k)
+
+# 3. Poisson Distribution
+lambda_ = 4  # Average number of events per interval
+data_poisson = poisson.rvs(lambda_, size=1000)
+axs[1, 0].hist(data_poisson, bins=10, color='orange', alpha=0.7)
+axs[1, 0].set_title('Poisson Distribution (λ=4)')
+#P(X=k) = (λ^k * e^(-λ)) / k!
+
+# 4. Geometric Distribution
+p = 0.3  # Probability of success
+data_geom = geom.rvs(p, size=1000)
+axs[1, 1].hist(data_geom, bins=15, color='purple', alpha=0.7)
+axs[1, 1].set_title('Geometric Distribution (p=0.3)')
+#P(X=k) = (1-p)^(k-1) * p
+
+# 5. Normal Distribution
+mu, sigma = 0, 1  # Mean = 0, Std Dev = 1
+data_norm = norm.rvs(mu, sigma, size=1000)
+axs[2, 0].hist(data_norm, bins=30, color='red', alpha=0.7)
+axs[2, 0].set_title('Normal Distribution (μ=0, σ=1)')
+#f(x) = (1 / sqrt(2πσ²)) * e^(-(x-μ)² / 2σ²)
+
+# 6. Uniform Distribution
+a, b = 0, 10  # Range [0, 10]
+data_uniform = uniform.rvs(loc=a, scale=b-a, size=1000)
+axs[2, 1].hist(data_uniform, bins=20, color='cyan', alpha=0.7)
+axs[2, 1].set_title('Uniform Distribution (a=0, b=10)')
+
+# 7. Exponential Distribution
+lambda_ = 1  # Rate parameter
+data_expon = expon.rvs(scale=1/lambda_, size=1000)
+axs[3, 0].hist(data_expon, bins=30, color='brown', alpha=0.7)
+axs[3, 0].set_title('Exponential Distribution (λ=1)')
+
+# 8. Beta Distribution
+from scipy.stats import beta
+alpha, beta_param = 2, 5  # Shape parameters
+data_beta = beta.rvs(alpha, beta_param, size=1000)
+axs[3, 1].hist(data_beta, bins=30, color='pink', alpha=0.7)
+axs[3, 1].set_title('Beta Distribution (α=2, β=5)')
+
+# Adjust layout
+plt.tight_layout(rect=[0, 0.03, 1, 0.95])
+plt.show()

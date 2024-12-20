@@ -1,0 +1,9 @@
+Name,Age,Gender,Salary,Department,Salary_after_tax
+Alice,25,Female,50000,HR,10000.0
+Bob,30,Male,60000,Engineering,12000.0
+Charlie,35,Male,55000,HR,11000.0
+Diana,28,Female,58000,Marketing,11600.0
+Eve,40,Female,65000,Engineering,13000.0
+Frank,29,Male,47000,Marketing,9400.0
+Grace,34,Female,52000,HR,10400.0
+Hank,26,Male,48000,Engineering,9600.0

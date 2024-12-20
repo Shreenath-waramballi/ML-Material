@@ -1,0 +1,33 @@
+import numpy as np
+heights=[170,175,180,160]
+weights=[65,70,67,59]
+height_array=np.array(heights)
+weight_array=np.array(weights)
+print("Height array:",height_array)
+print("weight array:",weight_array)
+#BMI weight(kg)/(height in cm/100)
+BMI=weight_array/(height_array/100)**2
+print("BMI:",BMI)
+print("BMI rounded off:",np.round(BMI,2))
+print("First height:",height_array[0])
+print("Last weight=",weight_array[-1])
+print("First two heights:",height_array[0:2])
+print("Last two weights:",weight_array[-2:])
+#NORMALISED VALUE=(VALUE-MinValue)/(MaxValue-MinValue)
+height_normalized=(height_array-height_array.min())/(height_array.max()-height_array.min())
+print("Normalized height:",height_normalized)
+weight_normalized=(weight_array-weight_array.min())/(weight_array.max()-weight_array.min())
+print("Normalized weight:",weight_normalized)
+#stack the normalized height and weight as 2d array
+feature=np.column_stack(height_normalized,weight_normalized)
+print("Feature by stacking into 2d form:",feature)
+overweight_value=np.where(BMI>25)
+print("Overweight value=",overweight_value)
+overweight_data=feature[overweight_value]
+print("Overweighted individual(normalized data)=",overweight_data)
+#mean height
+mean_height=np.mean(height_normalized)
+print("Normalized mean height=",mean_height)
+#standard weight
+std_weight=np.std(weight_normalized)
+print("Standard deviation of normalized weight=",std_weight)

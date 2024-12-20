@@ -1,0 +1,37 @@
+import pandas as pd
+import numpy as np
+import matplotlib.pyplot as plt
+#Step 1 data loading and cleaning
+data = pd.read_csv('sales_data.csv')
+#check for missing values
+print(data.isnull().sum())
+#here isnull().sum() will return the number of 
+# missing values in each column
+#convering the data to datetime data type
+data=data.dropna()
+data['OrderDate']=pd.to_datetime(data['OrderDate'])
+#Exploring the data analysis
+#Total sales over time
+data['MonthYear']=data['OrderDate'].dt.to_period('M')
+monthly_sales=data.groupby('MonthYear')['Quantity'].sum()
+#Top sellling product
+top_selling_product=data.groupby('Category')['Quantity'].sum().nlargest(5)
+#Relationship between price and quantity sold
+plt.scatter(data['UnitPrice'],data['Quantity'])
+plt.xlabel('Unit Price')
+plt.ylabel('Quantity Sold')
+plt.title('Price vs Quantity')
+plt.show()
+#Seasonal trends in  sales
+monthly_sales.plot(kind='line',marker='o')
+plt.xlabel('Month')
+plt.ylabel('Total Sales')
+plt.title('Monthly Sales trend')
+plt.xticks(rotation=45)
+plt.show()
+#Data visualisation
+top_selling_product.plot(kind='bar')
+plt.xlabel('Category')
+plt.ylabel('Quantity Sold')
+plt.title('Top Selling Product')
+plt.show()

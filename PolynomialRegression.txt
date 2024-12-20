@@ -1,0 +1,27 @@
+import numpy as np
+from sklearn.preprocessing import PolynomialFeatures
+from sklearn.linear_model import LinearRegression
+
+# Data: Hours Studied and Test Scores
+x = np.array([1, 2, 3, 4, 5]) # Hours studied (input feature)
+y = np.array([2, 3, 5, 4, 6])  # Test scores (target variable)
+
+# Step 1: Create Polynomial Features (degree = 2)
+poly = PolynomialFeatures(degree=2)  # Polynomial degree 2
+x_poly = poly.fit_transform(x)  # Transform x to include x^2
+
+# Step 2: Fit the model
+model = LinearRegression()
+model.fit(x_poly, y)
+
+# Step 3: Print model coefficients (intercept and polynomial coefficients)
+print("Intercept:", model.intercept_)
+print("Coefficients:", model.coef_)
+
+# Step 4: Get the predicted value for x = 5
+x_new = np.array([[5]])  # New input value (x = 5 hours)
+x_new_poly = poly.transform(x_new)  # Transform it into polynomial features
+y_new_pred = model.predict(x_new_poly)  # Predict the test score for x = 5
+
+# Output the prediction for x = 5
+print(f"Prediction for x = 5 (5 hours studied): Test Score = {y_new_pred[0]}")

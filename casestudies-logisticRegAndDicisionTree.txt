@@ -1,0 +1,114 @@
+1.Predicting House Prices Using Polynomial Regression
+Problem Statement:
+A real estate company wants to predict the prices of houses based on the number of bedrooms.
+ The data they have gathered shows the relationship between the number of bedrooms in a house and its price. However, 
+the relationship between the number of bedrooms and price is not linear, so a polynomial regression model will be used to better model the data.
+Number of Bedrooms (X)	vs House Price (Y) in thousands
+
+1	150
+2	180
+3	210
+4	280
+5	310
+6	400
+===============================================================
+# Import necessary libraries
+import numpy as np
+import matplotlib.pyplot as plt
+from sklearn.preprocessing import PolynomialFeatures
+from sklearn.linear_model import LinearRegression
+
+# Given data: Number of Bedrooms (X) and House Price (Y)
+X = np.array([1, 2, 3, 4, 5, 6]).reshape(-1, 1)  # Feature: Number of Bedrooms
+Y = np.array([150, 180, 210, 280, 310, 400])  # Target: House Price
+
+# Step 1: Visualize the data
+plt.scatter(X, Y, color='blue')
+plt.title("House Price vs. Number of Bedrooms")
+plt.xlabel("Number of Bedrooms")
+plt.ylabel("House Price (in thousands)")
+plt.show()
+
+# Step 2: Create a Polynomial Feature Transformer
+degree = 2  # Polynomial degree 2
+poly_reg = PolynomialFeatures(degree=degree)
+X_poly = poly_reg.fit_transform(X)
+
+# Step 3: Create the Polynomial Regression Model and Fit the Data
+lin_reg = LinearRegression()
+lin_reg.fit(X_poly, Y)
+
+# Step 4: Make Predictions
+# Let's predict the house price for 4.5 bedrooms
+x_new = np.array([[4.5]])  # 4.5 bedrooms
+x_new_poly = poly_reg.transform(x_new)  # Transform the input to match polynomial degree
+y_pred = lin_reg.predict(x_new_poly)
+
+print(f"Predicted House Price for 4.5 Bedrooms: {y_pred[0]:.2f} thousand dollars")
+
+# Step 5: Plot the Polynomial Regression Curve
+plt.scatter(X, Y, color='blue')
+plt.plot(X, lin_reg.predict(poly_reg.transform(X)), color='red')  # Polynomial regression curve
+plt.title("Polynomial Regression: House Price vs. Number of Bedrooms")
+plt.xlabel("Number of Bedrooms")
+plt.ylabel("House Price (in thousands)")
+plt.show()
+======================
+import pandas as pd
+import numpy as np
+import matplotlib.pyplot as plt
+from sklearn.model_selection import train_test_split
+from sklearn.tree import DecisionTreeClassifier, plot_tree
+from sklearn.metrics import classification_report, accuracy_score, confusion_matrix
+from sklearn.preprocessing import LabelEncoder
+
+# Create synthetic dataset
+data = {
+    'applicant_income': [45000, 54000, 120000, 80000, 60000, 70000, 85000, 90000, 35000, 100000],
+    'credit_score': [650, 700, 750, 800, 680, 690, 710, 730, 620, 760],
+    'loan_amount': [10000, 12000, 30000, 25000, 15000, 20000, 22000, 24000, 8000, 28000],
+    'employment_status': ['Employed', 'Employed', 'Self-Employed', 'Employed', 'Self-Employed', 
+                          'Employed', 'Self-Employed', 'Employed', 'Employed', 'Self-Employed'],
+    'loan_approved': ['Yes', 'Yes', 'Yes', 'No', 'Yes', 'Yes', 'No', 'Yes', 'No', 'No']  # Target variable
+}
+
+df = pd.DataFrame(data)
+
+# Encode categorical data
+label_encoder = LabelEncoder()
+df['employment_status'] = label_encoder.fit_transform(df['employment_status'])
+df['loan_approved'] = label_encoder.fit_transform(df['loan_approved'])
+
+# Features and target variable
+X = df.drop(columns=['loan_approved'])
+y = df['loan_approved']
+
+# Train-test split
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
+
+# Decision Tree Classifier
+dt = DecisionTreeClassifier(random_state=42)
+dt.fit(X_train, y_train)
+
+# Make predictions
+y_pred = dt.predict(X_test)
+
+# Evaluate the model
+print(f"Accuracy: {accuracy_score(y_test, y_pred):.2f}")
+print("\nClassification Report:\n", classification_report(y_test, y_pred))
+print("\nConfusion Matrix:\n", confusion_matrix(y_test, y_pred))
+
+# Plot confusion matrix
+plt.figure(figsize=(6, 6))
+sns.heatmap(confusion_matrix(y_test, y_pred), annot=True, fmt="d", cmap="Blues", xticklabels=["No", "Yes"], yticklabels=["No", "Yes"])
+plt.title('Confusion Matrix')
+plt.xlabel('Predicted')
+plt.ylabel('Actual')
+plt.show()
+
+# Visualize the Decision Tree
+plt.figure(figsize=(12, 8))
+plot_tree(dt, filled=True, feature_names=X.columns, class_names=['No', 'Yes'], fontsize=10)
+plt.title('Decision Tree Classifier')
+plt.show()
+========================================
